@@ -34,7 +34,7 @@ def create_todo():
 
     todo = request.args.get('todo')
     token_v2 = app.config["TOKEN"]
-    url = app.config["URL"]
+    url = os.environ.get("URL")
     createNotionTask(token_v2, url, todo)
     return f'added {todo} to Notion'
 
