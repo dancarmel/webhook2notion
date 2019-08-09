@@ -1,1 +1,1 @@
-web: python fapp.py
+web: python app.py
