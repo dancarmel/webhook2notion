@@ -1,0 +1,6 @@
+{
+  "name": "Webhook 2 Notion table",
+  "description": "Create a webhook where you can send todo's that will be added to your notion account",
+  "repository": "https://git.heroku.com/nameless-scrubland-94978.git",
+  "keywords": ["notion", "webhook", "notion-py"]
+}
