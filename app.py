@@ -6,13 +6,6 @@ from flask import request
 
 
 app = Flask(__name__)
-# if app.config["ENV"] == "production":
-#     app.config.from_object("config.ProductionConfig")
-# else:
-#     app.config.from_object("config.DevelopmentConfig")
-
-# print(f'ENV is set to: {app.config["ENV"]}')
-app.config.from_object("config.Config")
 
 
 def createNotionTask(token, collectionURL, content):
@@ -23,17 +16,11 @@ def createNotionTask(token, collectionURL, content):
     row.title = content
 
 
-# @app.route('/')
-# def hello_world():
-#     createNotionTask(token_v2, url, "flask executes via request")
-#     return 'got it'
-
-
 @app.route('/create_todo', methods=['GET'])
 def create_todo():
 
     todo = request.args.get('todo')
-    token_v2 = app.config["TOKEN"]
+    token_v2 = os.environ.get["TOKEN"]
     url = os.environ.get("URL")
     createNotionTask(token_v2, url, todo)
     return f'added {todo} to Notion'
