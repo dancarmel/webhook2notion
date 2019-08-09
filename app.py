@@ -6,12 +6,13 @@ from flask import request
 
 
 app = Flask(__name__)
-if app.config["ENV"] == "production":
-    app.config.from_object("config.ProductionConfig")
-else:
-    app.config.from_object("config.DevelopmentConfig")
+# if app.config["ENV"] == "production":
+#     app.config.from_object("config.ProductionConfig")
+# else:
+#     app.config.from_object("config.DevelopmentConfig")
 
-print(f'ENV is set to: {app.config["ENV"]}')
+# print(f'ENV is set to: {app.config["ENV"]}')
+app.config.from_object("config.Config")
 
 
 def createNotionTask(token, collectionURL, content):
