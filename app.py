@@ -13,8 +13,8 @@ def createNotionTask(token, collectionURL, content, author):
     client = NotionClient(token)
     cv = client.get_collection_view(collectionURL)
     row = cv.collection.add_row()
-    row.Name = content
-    row.Profile = author
+    row.name = content
+    row.profile = author
 
 
 @app.route('/tweet', methods=['GET'])
