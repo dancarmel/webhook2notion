@@ -25,14 +25,13 @@ def createTask(token, collectionURL, content):
     row.name = content
 
 
-def createReceipt(token, collectionURL, product, content, message_url):
+def createReceipt(token, collectionURL, product, content, ):
     # notion
     client = NotionClient(token)
     cv = client.get_collection_view(collectionURL)
     row = cv.collection.add_row()
     row.product = product
     row.content = content
-    row.message_url = message_url
 
 
 def createEmail(token, collectionURL, sender, subject, message_url):
@@ -68,10 +67,9 @@ def todoist():
 def gmailReceipt():
     product = request.args.get('product')
     content = request.args.get('content')
-    message_url = request.args.get('message_url')
     token_v2 = os.environ.get("TOKEN")
     url = os.environ.get("URL")
-    createReceipt(token_v2, url, product, content, message_url)
+    createReceipt(token_v2, url, product, content)
     return f'added {product} receipt to Notion'
 
 
