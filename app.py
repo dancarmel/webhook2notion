@@ -13,13 +13,12 @@ def createNotionTask(token, collectionURL, content, author):
     client = NotionClient(token)
     cv = client.get_collection_view(collectionURL)
     row = cv.collection.add_row()
-    row.title = content
-    row.text = author
+    row.Name = content
+    row.Profile = author
 
 
-@app.route('/create_todo', methods=['GET'])
-def create_todo():
-
+@app.route('/tweet', methods=['GET'])
+def tweet():
     tweet = request.args.get('tweet')
     author = request.args.get('author')
     token_v2 = os.environ.get("TOKEN")
