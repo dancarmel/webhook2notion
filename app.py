@@ -68,10 +68,10 @@ def todoist():
 def gmailReceipt():
     product = request.args.get('product')
     content = request.args.get('content')
-    date = request.args.get('date')
+    messageURL = request.args.get('messageURL')
     token_v2 = os.environ.get("TOKEN")
     url = os.environ.get("URL")
-    createReceipt(token_v2, url, product, content, date)
+    createReceipt(token_v2, url, product, content, messageURL)
     return f'added {product} receipt to Notion'
 
 
