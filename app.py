@@ -25,24 +25,24 @@ def createTask(token, collectionURL, content):
     row.name = content
 
 
-def createReceipt(token, collectionURL, product, content, date):
+def createReceipt(token, collectionURL, product, content, message_url):
     # notion
     client = NotionClient(token)
     cv = client.get_collection_view(collectionURL)
     row = cv.collection.add_row()
     row.product = product
     row.content = content
-    row.date = date
+    row.message_url = message_url
 
 
-def createEmail(token, collectionURL, sender, subject, messageURL):
+def createEmail(token, collectionURL, sender, subject, message_url):
     # notion
     client = NotionClient(token)
     cv = client.get_collection_view(collectionURL)
     row = cv.collection.add_row()
     row.sender = sender
     row.subject = subject
-    row.messageURL = messageURL
+    row.message_url = message_url
 
 
 @app.route('/twitter', methods=['GET'])
@@ -68,10 +68,10 @@ def todoist():
 def gmailReceipt():
     product = request.args.get('product')
     content = request.args.get('content')
-    messageURL = request.args.get('messageURL')
+    message_url = request.args.get('message_url')
     token_v2 = os.environ.get("TOKEN")
     url = os.environ.get("URL")
-    createReceipt(token_v2, url, product, content, messageURL)
+    createReceipt(token_v2, url, product, content, message_url)
     return f'added {product} receipt to Notion'
 
 
@@ -79,10 +79,10 @@ def gmailReceipt():
 def gmailUrgentEmail():
     sender = request.args.get('sender')
     subject = request.args.get('subject')
-    messageURL = request.args.get('messageURL')
+    message_url = request.args.get('message_url')
     token_v2 = os.environ.get("TOKEN")
     url = os.environ.get("URL")
-    createReceipt(token_v2, url, sender, subject, messageURL)
+    createReceipt(token_v2, url, sender, subject, message_url)
     return f'added email from {sender} to Notion'
 
 
