@@ -8,13 +8,14 @@ from flask import request
 app = Flask(__name__)
 
 
-def createTweet(token, collectionURL, content, author):
+def createTweet(token, collectionURL, content, authorn, url):
     # notion
     client = NotionClient(token)
     cv = client.get_collection_view(collectionURL)
     row = cv.collection.add_row()
     row.name = content
     row.profile = author
+    row.url = url
 
 
 def createTask(token, collectionURL, content):
@@ -50,9 +51,10 @@ def createEmail(token, collectionURL, sender, subject, message_url):
 def twitter():
     tweet = request.args.get('tweet')
     author = request.args.get('author')
+    tweetURL = request.args.get('url')
     token_v2 = os.environ.get("TOKEN")
     url = os.environ.get("URL")
-    createTweet(token_v2, url, tweet, author)
+    createTweet(token_v2, url, tweet, author, tweetURL)
     return f'added {tweet} to Notion'
 
 
