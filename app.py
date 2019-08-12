@@ -8,14 +8,14 @@ from flask import request
 app = Flask(__name__)
 
 
-def createTweet(token, collectionURL, content, authorn, url):
+def createTweet(token, collectionURL, tweet, author, url):
     # notion
     client = NotionClient(token)
     cv = client.get_collection_view(collectionURL)
     row = cv.collection.add_row()
-    row.name = content
-    row.profile = author
-    row.url = url
+    row.tweet = tweet
+    row.author = author
+    row.address = url
 
 
 def createTask(token, collectionURL, content):
