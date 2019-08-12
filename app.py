@@ -25,7 +25,7 @@ def createTask(token, collectionURL, content):
     row.name = content
 
 
-def createReceipt(token, collectionURL, product, content, url):
+def createReceipt(token, collectionURL, product, content, url, date):
     # notion
     client = NotionClient(token)
     cv = client.get_collection_view(collectionURL)
@@ -33,6 +33,7 @@ def createReceipt(token, collectionURL, product, content, url):
     row.product = product
     row.content = content
     row.url = url
+    row.date = date
 
 
 def createEmail(token, collectionURL, sender, subject, message_url):
@@ -69,9 +70,10 @@ def gmailReceipt():
     product = request.args.get('product')
     content = request.args.get('content')
     message_url = request.args.get('url')
+    date = request.args.get('date')
     token_v2 = os.environ.get("TOKEN")
     url = os.environ.get("URL")
-    createReceipt(token_v2, url, product, content, message_url)
+    createReceipt(token_v2, url, product, content, message_url, date)
     return f'added {product} receipt to Notion'
 
 
@@ -82,7 +84,7 @@ def gmailUrgentEmail():
     message_url = request.args.get('url')
     token_v2 = os.environ.get("TOKEN")
     url = os.environ.get("URL")
-    createReceipt(token_v2, url, sender, subject, message_url)
+    createEmail(token_v2, url, sender, subject, message_url)
     return f'added email from {sender} to Notion'
 
 
