@@ -94,7 +94,7 @@ def gmailUrgentEmail():
     createEmail(token_v2, url, sender, subject, message_url)
     return f'added email from {sender} to Notion'
 
-@app.route('/getWeather', methods=['GET'])
+@app.route('/getweather', methods=['GET'])
 def getWeather():
     weather = request.args.get('weather')
     token_v2 = os.environ.get("TOKEN")
