@@ -7,6 +7,11 @@ from flask import request
 
 app = Flask(__name__)
 
+def trackWeather(token, URL, weather):
+    # notion
+    client = NotionClient(token)
+    block = client.get_block(URL)
+    block.title = weather
 
 def createTweet(token, collectionURL, tweet, author, followers):
     # notion
@@ -88,6 +93,14 @@ def gmailUrgentEmail():
     url = os.environ.get("URL")
     createEmail(token_v2, url, sender, subject, message_url)
     return f'added email from {sender} to Notion'
+
+@app.route('/getWeather', methods=['GET'])
+def getWeather():
+    weather = request.args.get('weather')
+    token_v2 = os.environ.get("TOKEN")
+    url = os.environ.get("URL")
+    trackWeather(token_v2, url, weather)
+    return f'added {weather} to Notion'
 
 
 if __name__ == '__main__':
