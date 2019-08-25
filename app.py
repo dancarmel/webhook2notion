@@ -96,7 +96,7 @@ def gmailUrgentEmail():
 
 @app.route('/getweather', methods=['GET'])
 def getWeather():
-    weather = request.args.get('weather')
+    weather = str(request.args.get('weather'))
     token_v2 = os.environ.get("TOKEN")
     url = os.environ.get("URL")
     trackWeather(token_v2, url, weather)
