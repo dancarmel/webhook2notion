@@ -23,7 +23,7 @@ def createTask(token, collectionURL, content):
     client = NotionClient(token)
     cv = client.get_collection_view(collectionURL)
     row = cv.collection.add_row()
-    row.name = content
+    row.task = content
 
 
 def createReceipt(token, collectionURL, product, content, url, date):
@@ -58,8 +58,8 @@ def twitter():
     return f'added {tweet} to Notion'
 
 
-@app.route('/todoist', methods=['GET'])
-def todoist():
+@app.route('/tasks', methods=['GET'])
+def tasks():
     todo = request.args.get('todo')
     token_v2 = os.environ.get("TOKEN")
     url = os.environ.get("URL")
