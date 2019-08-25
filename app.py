@@ -60,7 +60,7 @@ def twitter():
 
 @app.route('/tasks', methods=['GET'])
 def tasks():
-    todo = request.args.get('todo')
+    todo = request.args.get('task')
     token_v2 = os.environ.get("TOKEN")
     url = os.environ.get("URL")
     createTask(token_v2, url, todo)
